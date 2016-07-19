@@ -42,15 +42,16 @@ master节点和worker的通信以及和client的通信都需要基于[TLS](https
 1. 根据上面的文档生成这些证书文件
 1. 使用scp将这些文档发到master节点上
 1. 拷贝这些文件到```/etc/kubernetes/ssl```目录，并确保这些文件的属主是root:
-  ```
-  # Move keys
-  sudo mkdir -p /etc/kubernetes/ssl/
-  sudo mv -t /etc/kubernetes/ssl/ ca.pem apiserver.pem apiserver-key.pem
 
-  # Set Permissions
-  sudo chmod 600 /etc/kubernetes/ssl/apiserver-key.pem
-  sudo chown root:root /etc/kubernetes/ssl/apiserver-key.pem
-  ```
+	```
+	# Move keys
+	sudo mkdir -p /etc/kubernetes/ssl/
+	sudo mv -t /etc/kubernetes/ssl/ ca.pem apiserver.pem apiserver-key.pem
+	# Set Permissions
+	sudo chmod 600 /etc/kubernetes/ssl/apiserver-key.pem
+	sudo chown root:root /etc/kubernetes/ssl/apiserver-key.pem
+	```
+
 1. 重启kubelet，确保master正确读取这些key，如果在配置master之前完成这一步，可以无需重启
   ```
   sudo systemctl restart kubelet
@@ -64,14 +65,16 @@ master节点和worker的通信以及和client的通信都需要基于[TLS](https
 1. ```<KUBERNETES_MASTER>```: 前面步骤配置的master节点的IP地址
 1. ```<ETCD_AUTHORITY>```: etcd的一个节点的IP端口，如上
 1. ```<MY_ETCD_ENDPOINTS>```: 配置etcd集群访问的链接串，同上配置即可
-1. ```<CA_CERT>```: 粘贴ca.pem的内容,比如:
-  ```
-  -----BEGIN CERTIFICATE-----
-  MIIC9zCCA...
-  ...
-  ...sRj2yQ==
-  -----END CERTIFICATE-----
-  ```
+1. ```<CA_CERT>```,粘贴ca.pem的内容,比如:
+
+	```
+	-----BEGIN CERTIFICATE-----
+	MIIC9zCCA...
+	...
+	...sRj2yQ==
+	-----END CERTIFICATE-----
+	```
+
 1. ```<CA_KEY_CERT>```: 粘贴ca-key.pem的内容
 
 
