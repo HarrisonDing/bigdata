@@ -2,7 +2,7 @@
 本目录下包含了使用cloud-config文件完成kubernetes集群的安装的模版文件：
 
 |文件|说明|
-|--|--|
+|---|---|
 |etcd2_cc.yaml|配置本机启动etcd2服务|
 |kubernetes_master_cc.yaml|安装配置本机作为kubernetes master(flannel网络)|
 |kubernetes_master_cc_calico.yaml|使用calico作为默认网络方案的kubernetes master配置|
@@ -16,7 +16,7 @@
 下面的表格展示了一个样例集群的规划：
 
 |主机|安装组件|
-|--|--|
+|---|---|
 |kubernetes-master|etcd2第一个节点, kubernetes master|
 |etcd2|etcd2的第二个节点|
 |etcd3|etcd2的第三个节点|
