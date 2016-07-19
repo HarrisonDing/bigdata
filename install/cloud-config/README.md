@@ -64,7 +64,7 @@ master节点和worker的通信以及和client的通信都需要基于[TLS](https
 1. ```<KUBERNETES_MASTER>```: 前面步骤配置的master节点的IP地址
 1. ```<ETCD_AUTHORITY>```: etcd的一个节点的IP端口，如上
 1. ```<MY_ETCD_ENDPOINTS>```: 配置etcd集群访问的链接串，同上配置即可
-1. ```<CA_CERT>```: 粘贴ca.pem的内容,比如：
+1. ```<CA_CERT>```: 粘贴ca.pem的内容,比如:
   ```
   -----BEGIN CERTIFICATE-----
   MIIC9zCCA...
