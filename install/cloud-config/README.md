@@ -69,9 +69,9 @@ master节点和worker的通信以及和client的通信都需要基于[TLS](https
 
 	```
 	-----BEGIN CERTIFICATE-----
-	MIIC9zCCA...
-	...
-	...sRj2yQ==
+	MIIC9zCCA
+	......
+	sRj2yQ==
 	-----END CERTIFICATE-----
 	```
 
