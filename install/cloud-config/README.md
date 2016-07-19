@@ -1,5 +1,6 @@
 # 使用cloud-config在CoreOS之上安装kubernetes
 本目录下包含了使用cloud-config文件完成kubernetes集群的安装的模版文件：
+
 |文件|说明|
 |--|--|
 |etcd2_cc.yaml|配置本机启动etcd2服务|
@@ -13,6 +14,7 @@
 首先确定要安装的集群选用的网络方案，是使用calico还是flannel。使用calico，则以下文档中使用的cloud-config需要使用后缀为```_calico.yaml```的文件
 ### 集群规划
 下面的表格展示了一个样例集群的规划：
+
 |主机|安装组件|
 |--|--|
 |kubernetes-master|etcd2第一个节点, kubernetes master|
@@ -26,10 +28,11 @@
 
 ### 配置kubernetes master
 1. 使用```etcd2_cc.yaml```配置作为etcd2的集群节点。注意必须配置```name```字段。这里默认是使用discovery方式配置集群(将注释掉的discovery一行加上，并根据说明生成token)，若需要使用静态ip配置或其他etcd配置方式请参考[这里](https://github.com/k8sp/etcd)
-1. 在```kubernetes_master_cc.yaml```，修改<SSH_PUBLIC_KEY>为你本机的ssh公钥，参考[这里](https://linuxconfig.org/passwordless-ssh)
-1. 在```kubernetes_master_cc.yaml```，修改<MY_ETCD_ENDPOINTS>为etcd集群的endpoints串，对于此例的集群规划，可以配置```http:///kubernetes-master:2379,http://etcd2:2379,http://etcd3:2379```。***注意：版本较低的skydns和nginx-ingress-controller不支持配置ETCD_ENDPOINTS，只能配置一个etcd的地址***
-1. 在```kubernetes_master_cc.yaml```，修改<MASTER_IP>为本机的IP地址
-1. 如果是calico模式，修改<ETCD_AUTHORITY>为etcd集群的一台机器的ip端口: ```kubernetes-master:2379```
+1. ```kubernetes_master_cc.yaml```，修改<SSH_PUBLIC_KEY>为你本机的ssh公钥，参考[这里](https://linuxconfig.org/passwordless-ssh)
+1. ```kubernetes_master_cc.yaml```，修改<MY_ETCD_ENDPOINTS>为etcd集群的endpoints串，对于此例的集群规划，可以配置```http:\/\/kubernetes-master:2379,http:\/\/etcd2:2379,http:\/\/etcd3:2379```。***注意：版本较低的skydns和nginx-ingress-controller不支持配置ETCD_ENDPOINTS，只能配置一个etcd的地址***
+1. ```kubernetes_master_cc.yaml```，修改<MASTER_IP>为本机的IP地址
+1. 修改```${ETCD_ENDPOINTS}```为ETCD集群的地址不需要转义:```http://kubernetes-master:2379,http://etcd2:2379,http://etcd3:2379```
+1. 如果是calico模式，在```kubernetes_master_cc_calico.yaml```修改<ETCD_AUTHORITY>为etcd集群的一台机器的ip端口: ```kubernetes-master:2379```
 1. 执行```coreos-cloudinit --from-file kubernetes_master_cc.yaml```完成安装
 
 

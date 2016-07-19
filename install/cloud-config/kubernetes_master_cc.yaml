@@ -3,9 +3,9 @@
 hostname: kubernetes-master
 users:
   - name: core
-    ssh-authorized-keys: 
+    ssh-authorized-keys:
       - "<SSH_PUBLIC_KEY>"
-    groups: 
+    groups:
       - sudo
     shell: /bin/bash
 
@@ -15,7 +15,7 @@ write_files:
     permissions: 0755
     content: |
       #! /usr/bin/bash
-      
+
       if [ ! -f /opt/bin/kubelet ]; then
         echo "Kubenetes not installed - installing."
 
@@ -29,20 +29,20 @@ write_files:
     owner: root
     permissions: 0644
     content: |
-      FLANNELD_IFACE=${ADVERTISE_IP}
-      FLANNELD_ETCD_ENDPOINTS=${ETCD_ENDPOINTS}
+      FLANNELD_IFACE=<MASTER_IP>
+      FLANNELD_ETCD_ENDPOINTS=<MY_ETCD_ENDPOINTS>
 
   - path: /opt/bin/install-manifests.sh
     owner: root
     permissions: 0755
     content: |
       #! /usr/bin/bash
-      
+
       # Ensure directories exists.
       sudo mkdir -p /etc/kubernetes/manifests/
       sudo mkdir -p /etc/kubernetes/ssl/
       sudo mkdir -p /etc/kubernetes/addons/
-      
+
       if [ ! -f /etc/kubernetes/manifests/kubernetes-master.manifest ]; then
         echo "Manifests not installed - installing."
 
@@ -88,7 +88,7 @@ coreos:
       command: start
       content: |
         [Unit]
-        Description=Installs Manifests 
+        Description=Installs Manifests
         After=setup-network-environment.service
         Requires=setup-network-environment.service
 
@@ -139,7 +139,7 @@ coreos:
         Documentation=https://github.com/kubernetes/kubernetes
         Requires=docker.service kubernetes-install.service
         After=kubernetes-install.service docker.service
-  
+
         [Service]
         Environment=KUBELET_VERSION=v1.2.4_coreos.1
         EnvironmentFile=/etc/network-environment
@@ -158,7 +158,6 @@ coreos:
         --logtostderr=true
         Restart=always
         RestartSec=10
-  
+
         [Install]
         WantedBy=multi-user.target
-
