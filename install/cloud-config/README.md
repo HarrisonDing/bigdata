@@ -79,5 +79,4 @@ master节点和worker的通信以及和client的通信都需要基于[TLS](https
 * 为了能完成全自动的kubernetes worker的部署和启动，需要有以下功能
  * 一个内网key生成和管理的服务，用来自动的为每个新启动的worker配置worker的key
  * 自动从一个中心的地方获得每个worker对应的cloud-config文件
-
 * ```<ETCD_AUTHORITY>```，应该使用高版本的ETCD_ENDPOINTS替换
