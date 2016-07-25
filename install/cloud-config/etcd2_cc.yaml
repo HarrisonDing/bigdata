@@ -3,7 +3,7 @@
 coreos:
   etcd2:
     # must give the node name
-    #name: "corenode01"
+    name: "<node_name>"
     #generate a new token for each unique cluster from https://discovery.etcd.io/new
     #discovery: https://discovery.etcd.io/<token>
     # multi-region and multi-cloud deployments need to use $public_ipv4
