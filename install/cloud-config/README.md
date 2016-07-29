@@ -70,7 +70,7 @@ master节点和worker的通信以及和client的通信都需要基于[TLS](https
 	```
 
 1. ```<CA_KEY_CERT>```: 粘贴ca-key.pem的内容
-1. ```<IFACE>```: Flanneld节点之间通信IP所在的网卡
+
 
 ## TODO
 * 为了能完成全自动的kubernetes worker的部署和启动，需要有以下功能

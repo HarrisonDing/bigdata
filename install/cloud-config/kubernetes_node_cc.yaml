@@ -187,7 +187,6 @@ coreos:
     reboot-strategy: off
   flannel:
     etcd_endpoints: "<MY_ETCD_ENDPOINTS>"
-    interface: "eth0"
   units:
     - name: setup-network-environment.service
       runtime: true
