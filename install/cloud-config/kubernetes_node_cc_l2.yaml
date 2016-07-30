@@ -114,7 +114,7 @@ write_files:
           command:
           - /hyperkube
           - proxy
-          - --master=https://<KUBERNETES_MASTER>:443
+          - --master=https://<MASTER_IP>:443
           - --kubeconfig=/etc/kubernetes/worker-kubeconfig.yaml
           - --proxy-mode=iptables
           securityContext:
@@ -142,9 +142,6 @@ write_files:
 coreos:
   update:
     reboot-strategy: off
-  flannel:
-    etcd_endpoints: "<MY_ETCD_ENDPOINTS>"
-    interface: "<IFACE>"
   units:
     - name: setup-network-environment.service
       runtime: true
@@ -183,11 +180,14 @@ coreos:
       runtime: true
       command: start
       drop-ins:
-      - name: 40-docker-flannel.conf
+      - name: 50-docker-l2bridge.conf
         content: |
           [Unit]
-          After=docker.socket early-docker.target network.target flanneld.service
-          Requires=docker.socket early-docker.target flanneld.service
+          After=docker.socket network.target
+          Requires=docker.socket
+
+          [Service]
+          Environment="DOCKER_OPTS=--bridge=br-eno1 --iptables=false --ip-masq=false"
 
     - name: kubernetes-install.service
       runtime: true
@@ -224,13 +224,14 @@ coreos:
         --cluster-domain=cluster.local \
         --config=/etc/kubernetes/manifests \
         --hostname-override=${DEFAULT_IPV4} \
-        --api-servers=https://<KUBERNETES_MASTER>:443 \
+        --api-servers=https://<MASTER_IP>:443 \
         --kubeconfig=/etc/kubernetes/worker-kubeconfig.yaml \
         --tls-private-key-file=/etc/kubernetes/ssl/worker-key.pem \
         --tls-cert-file=/etc/kubernetes/ssl/worker.pem \
         --logtostderr=true \
         --network-plugin= \
-        --network-plugin-dir=/etc/cni/net.d
+        --network-plugin-dir=/etc/cni/net.d \
+        --configure-cbr0=true
         Restart=always
         RestartSec=10
 
