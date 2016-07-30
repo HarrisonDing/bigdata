@@ -68,56 +68,13 @@ write_files:
     owner: core
     permissions: 0644
     content: |
-      -----BEGIN CERTIFICATE-----
-      MIIC9zCCAd+gAwIBAgIJAPkNhzg0htJ+MA0GCSqGSIb3DQEBCwUAMBIxEDAOBgNV
-      BAMMB2t1YmUtY2EwHhcNMTYwNjEyMDMzMTM5WhcNNDMxMDI5MDMzMTM5WjASMRAw
-      DgYDVQQDDAdrdWJlLWNhMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA
-      29XeNzapan8XVyAK87RkAAm0tYhkffBEetWyDqPVyJoiywIqoPYZby9yr+JxrevG
-      rc6Kl9X1A6FAHStKHExg5t0SsXdUfkJyaAkoAX97lEb/afshCJO2DhlOmJEovDUj
-      SWPi2SCz1InNSh8RQFfeSXdV8pexBJA9oqCLaysvW+qGDMGXeunJ7PVutSVAoVp0
-      Ow+fSdIED3OkTPxP3Xo9su2svY/EykjyXSv1XdQYTAq41ePZ2wQKIWKxmLApz6BD
-      Mar6OwE2CUwZmA99fwuWOuo3slCMAk3sazZ35nb+8uO8KOz0KC/+5NdMPH07VqjD
-      b/bTX24rg14aNRNKTCtEYwIDAQABo1AwTjAdBgNVHQ4EFgQUkeMaNFse8AzSAZU6
-      t0Yo5FIuHH8wHwYDVR0jBBgwFoAUkeMaNFse8AzSAZU6t0Yo5FIuHH8wDAYDVR0T
-      BAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAVa5W/lVSCI7rgAhXeLsy1ctNwIha
-      lc/9xOYyBApXHGwdDycV4PU+HzoMLHOYn7dkg/1YYQ+vKwPtVkiJhuhBMYx5FhAZ
-      4yVY6Pz7qx2PTehVNwT4zFVl1+JWs/7bqztxbG24YZmF0xRx0IpyKCGR3vF3+eAl
-      KZllyiKcVfRLBvs7ecs7xZ4phPY1sro173EDJsSL6qEzl1jGDgSLY0JEoMiXnwZX
-      kayhXCWaGfpvjfHLgl/nBKk3TADDAIX3XpfCPKZYQbOOj1BBrKwUwcF/GK0jLNnI
-      iRJgLr+XGK6amXCBhrhP21iuQZOMX+yj20Wvk7RLODkcEaPldrBfsRj2yQ==
-      -----END CERTIFICATE-----
+      <CA_CERT>
 
   - path: /etc/kubernetes/ssl/ca-key.pem
     owner: core
     permissions: 0644
     content: |
-      -----BEGIN RSA PRIVATE KEY-----
-      MIIEpAIBAAKCAQEA29XeNzapan8XVyAK87RkAAm0tYhkffBEetWyDqPVyJoiywIq
-      oPYZby9yr+JxrevGrc6Kl9X1A6FAHStKHExg5t0SsXdUfkJyaAkoAX97lEb/afsh
-      CJO2DhlOmJEovDUjSWPi2SCz1InNSh8RQFfeSXdV8pexBJA9oqCLaysvW+qGDMGX
-      eunJ7PVutSVAoVp0Ow+fSdIED3OkTPxP3Xo9su2svY/EykjyXSv1XdQYTAq41ePZ
-      2wQKIWKxmLApz6BDMar6OwE2CUwZmA99fwuWOuo3slCMAk3sazZ35nb+8uO8KOz0
-      KC/+5NdMPH07VqjDb/bTX24rg14aNRNKTCtEYwIDAQABAoIBAANMHuwnFr1xMJFu
-      +psTLpjNjHdYl2FINE6/W89aZ799iF4RJ0CI0HLZfFflBp18NtuuiGeknusyBPsr
-      Bg6Mmrt7v2cICi1mo76pvH7hQaJEuloFmUY+qPFnMcWaD8la5q+YHvPwyKG8e2bM
-      Nn8Hkl75ukFMQyx1WWdSDyVJXYl8YO5qdg4jP2xXgH1u/kT1V3OyzjdJ0922uY/T
-      uGRLkpK3o4a8Ir2UlqbXWtpIGOdFx6snBcglWRCtu9dN+cbDv5n3F6ak3gpveUUK
-      ZLhs2Lybxlu8dRnIpNP9XKDQ1f0DDOvLWucGck4fL5Xg2PK3Rhv9BcVk0ncM2Xs6
-      FrfgwxkCgYEA748AZ/GkKfm3QhxUW9l2wEh7uJUXOkpLcMSO2jtsCS4KVa0OeXTQ
-      IblT0BGCfjb0qoU0iiirs91I6xS+2Mk9eOII6aAWnNR2yC/gy8njCOlmIIixg7wP
-      RWZkX5xoXqsFjSAVyyyl/Z7DvbW0Jm7m9xVl4rHH8/nrYAYwOUw/Hm8CgYEA6uxV
-      gazfIX1J7+8m6XsqK/59htgi6zlqBIMlQ6CAkSfcPr9W+zI6gy5j0H5VdcliYF4M
-      CmEO125Xny5PT0UDHj5DoTX+/m8I9ZpFrIvc/Gb/iqjB+Nir313WXHmYLsYqPvYE
-      jas8knGzRl8WeUiUAjGlDkIy4mkSwGnbAedRM00CgYBHiNpEL8InzqvMkA0YyF1P
-      mdVoDw06mMjiSa+mtyvRqe/oGZ9C4YDtMRw3+6KN8fcpnFFOGEr9kMyfdjhvH9i9
-      ajHjIaze9ArsSG/GKuki1h9rA6aOge/Fd4ftjRUVf9hOhhA79X8ztt8YnVPITkGl
-      8rvT7+aXkj+ZEv//fCc0/QKBgQCDje0kPQaG3n51GluUDCDFmjH5PTfwuaog9L/9
-      avgUUVoI2WWALdSOeX/z1YtN9oRcqs3bUhbZlTUEMw6+uUrRuNRuhqpRGSTPRKEX
-      ywrpXVRk9bQKAmvdHdNY3c7XAqnNsD9EhkvZRkq6ca1IJdickeh4X6HXIDgcACtg
-      mYTjUQKBgQCbLbJpCuHxTwzpXWV+jzmURCqyi/qY1/1aaXVNJQW41whKFtxs2SkR
-      FezKqjn/o170dvGrNtlOk5KIU8OF/JB06pFo59+O6MGm1HlbfyQRYh57cN9k9z55
-      b04kgUqhfNMZuwriQdKb3vVE0FA9dgdZZXw+HdezLCTVFgXVq4SpRA==
-      -----END RSA PRIVATE KEY-----
+      <CA_KEY_CERT>
 
   - path: /etc/kubernetes/worker-kubeconfig.yaml
     owner: root
