@@ -63,8 +63,6 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /tmp/tls.key -out /t
 
 * 以Secret的方式发布到集群中
 
-
-
 ```
 echo "
 apiVersion: v1
