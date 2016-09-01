@@ -6,7 +6,7 @@
 
 
 
-### 部署流程
+### 发布一个Web App
 
 * 发布ingress controller的rc
 
@@ -53,6 +53,50 @@ hello     -                         172.17.8.102   1h
 
 ```
 curl 172.17.8.102 -H 'Host: hello.bar.com'
+```
+### 发布一个基于HTTPS的Web App
+* 通过```openssl```工具生成证书，假设域名为```foo.bar.com```如果选用已有证书可跳过此步骤
+
+```
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /tmp/tls.key -out /tmp/tls.crt -subj "/CN=foo.bar.com"
+```
+
+* 以Secret的方式发布到集群中
+
+```
+echo "
+apiVersion: v1
+kind: Secret
+metadata:
+  name: foo-secret
+data:
+  tls.crt: `base64 /tmp/tls.crt`
+  tls.key: `base64 /tmp/tls.key`
+" | kubectl create -f -
+```
+
+
+* 创建Ingress并使用secret的信息
+
+```
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: foo
+  namespace: default
+spec:
+  tls:
+  - hosts:
+    - foo.bar.com
+    secretName: foo-secret
+  rules:
+  - host: foo.bar.com
+    http:
+      paths:
+      - backend:
+          serviceName: hellos
+          servicePort: 8080
+        path: /
 ```
 
 ### 关于Ingress
