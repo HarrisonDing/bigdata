@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fluentd
+spec:
+  imagePullSecrets:
+  - name: docker-registry-sys
+  containers:
+  - name: fluentd
+    image: docker.baifendian.com/custom-fluentd
+    volumeMounts:
+      - mountPath: /var/lib/docker/containers
+        name: "docker-logs"
+  volumes:
+  - name: "docker-logs"
+    hostPath:
+      path: "/var/lib/docker/containers"
