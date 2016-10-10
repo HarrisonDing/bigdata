@@ -3,11 +3,9 @@ kind: Pod
 metadata:
   name: fluentd
 spec:
-  imagePullSecrets:
-  - name: docker-registry-sys
   containers:
   - name: fluentd
-    image: docker.baifendian.com/custom-fluentd
+    image: yancey1989/custom-fluentd
     volumeMounts:
       - mountPath: /var/lib/docker/containers
         name: "docker-logs"
