@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+  <!--
+  <property>
+    <name>yarn.resourcemanager.hostname</name>
+    <value>yarn-rm</value>
+  </property>
+-->
+
+  <property>
+    	<name>yarn.resourcemanager.ha.enabled</name>
+    	<value>true</value>
+     </property>
+     <property>
+    	<name>yarn.resourcemanager.ha.automatic-failover.enabled</name>
+    	<value>true</value>
+     </property>
+     <property>
+    	<name>yarn.resourcemanager.ha.automatic-failover.embedded</name>
+    	<value>true</value>
+     </property>
+     <property>
+    	<name>yarn.resourcemanager.cluster-id</name>
+    	<value>yarn-rm</value>
+     </property>
+
+     <property>
+    	<name>yarn.resourcemanager.ha.rm-ids</name>
+    	<value>rm1,rm2</value>
+     </property>
+<!--
+     <property>
+        <name>yarn.resourcemanager.ha.id</name>
+    	  <value>rm1</value>
+     </property>
+
+     <property>
+      <name>yarn.resourcemanager.hostname.rm1</name>
+      <value>yarn-rm-0.yarn-rm.yarn-cluster-lp.svc.cluster.local</value>
+    </property>
+
+    <property>
+      <name>yarn.resourcemanager.hostname.rm2</name>
+      <value>yarn-rm-1.yarn-rm.yarn-cluster-lp.svc.cluster.local</value>
+    </property>
+-->
+     <property>
+    	<name>yarn.resourcemanager.recovery.enabled</name>
+    	<value>true</value>
+     </property>
+     <property>
+    	 <name>yarn.resourcemanager.store.class</name>
+ 	     <value>org.apache.hadoop.yarn.server.resourcemanager.recovery.ZKRMStateStore</value>
+     </property>
+     <property>
+     	<name>yarn.resourcemanager.zk-state-store.parent-path</name>
+     	<value>/rmstore</value>
+     </property>
+     <property>
+  	<name>yarn.resourcemanager.zk-address</name>
+  	<value>zk-0.zk-headless.yarn-cluster-lp.svc.cluster.local:2181,zk-1.zk-headless.yarn-cluster-lp.svc.cluster.local:2181,zk-2.zk-headless.yarn-cluster-lp.svc.cluster.local:2181/bfdoffline/bfdhadoopcool</value>
+     </property>
+<!-- RM1 configs -->
+     <property>
+    	 <name>yarn.resourcemanager.address.rm1</name>
+  	   <value>yarn-rm-0.yarn-rm.yarn-cluster-lp.svc.cluster.local:8032</value>
+     </property>
+
+     <property>
+    	<name>yarn.resourcemanager.scheduler.address.rm1</name>
+    	<value>yarn-rm-0.yarn-rm.yarn-cluster-lp.svc.cluster.local:8030</value>
+     </property>
+
+     <property>
+    	<name>yarn.resourcemanager.webapp.https.address.rm1</name>
+    	<value>yarn-rm-0.yarn-rm.yarn-cluster-lp.svc.cluster.local:8090</value>
+     </property>
+
+     <property>
+    	<name>yarn.resourcemanager.webapp.address.rm1</name>
+    	<value>yarn-rm-0.yarn-rm.yarn-cluster-lp.svc.cluster.local:8088</value>
+     </property>
+
+     <property>
+    	<name>yarn.resourcemanager.resource-tracker.address.rm1</name>
+    	<value>yarn-rm-0.yarn-rm.yarn-cluster-lp.svc.cluster.local:8031</value>
+     </property>
+
+     <property>
+    	<name>yarn.resourcemanager.admin.address.rm1</name>
+     	<value>yarn-rm-0.yarn-rm.yarn-cluster-lp.svc.cluster.local:8033</value>
+     </property>
+
+<!-- RM2 configs -->
+     <property>
+        <name>yarn.resourcemanager.address.rm2</name>
+        <value>yarn-rm-1.yarn-rm.yarn-cluster-lp.svc.cluster.local:8032</value>
+     </property>
+
+     <property>
+        <name>yarn.resourcemanager.scheduler.address.rm2</name>
+        <value>yarn-rm-1.yarn-rm.yarn-cluster-lp.svc.cluster.local:8030</value>
+     </property>
+
+     <property>
+        <name>yarn.resourcemanager.webapp.https.address.rm2</name>
+        <value>yarn-rm-1.yarn-rm.yarn-cluster-lp.svc.cluster.local:8090</value>
+     </property>
+
+     <property>
+        <name>yarn.resourcemanager.webapp.address.rm2</name>
+        <value>yarn-rm-1.yarn-rm.yarn-cluster-lp.svc.cluster.local:8088</value>
+     </property>
+
+     <property>
+        <name>yarn.resourcemanager.resource-tracker.address.rm2</name>
+        <value>yarn-rm-1.yarn-rm.yarn-cluster-lp.svc.cluster.local:8031</value>
+     </property>
+
+     <property>
+        <name>yarn.resourcemanager.admin.address.rm2</name>
+        <value>yarn-rm-1.yarn-rm.yarn-cluster-lp.svc.cluster.local:8033</value>
+     </property>
+
+  <property>
+    <name>yarn.nodemanager.vmem-check-enabled</name>
+    <value>false</value>
+  </property>
+
+  <property>
+    <name>yarn.nodemanager.aux-services</name>
+    <value>mapreduce_shuffle</value>
+  </property>
+
+  <property>
+    <name>yarn.nodemanager.aux-services.mapreduce_shuffle.class</name>
+    <value>org.apache.hadoop.mapred.ShuffleHandler</value>
+  </property>
+
+  <property>
+    <description>List of directories to store localized files in.</description>
+    <name>yarn.nodemanager.local-dirs</name>
+    <value>/var/lib/hadoop-yarn/cache/${user.name}/nm-local-dir</value>
+  </property>
+
+  <property>
+    <description>Where to store container logs.</description>
+    <name>yarn.nodemanager.log-dirs</name>
+    <value>/var/log/hadoop-yarn/containers</value>
+  </property>
+
+  <property>
+    <description>Where to aggregate logs to.</description>
+    <name>yarn.nodemanager.remote-app-log-dir</name>
+    <value>/var/log/hadoop-yarn/apps</value>
+  </property>
+
+  <property>
+    <name>yarn.application.classpath</name>
+    <value>
+      /usr/local/hadoop/etc/hadoop,
+      /usr/local/hadoop/share/hadoop/common/*,
+      /usr/local/hadoop/share/hadoop/common/lib/*,
+      /usr/local/hadoop/share/hadoop/hdfs/*,
+      /usr/local/hadoop/share/hadoop/hdfs/lib/*,
+      /usr/local/hadoop/share/hadoop/mapreduce/*,
+      /usr/local/hadoop/share/hadoop/mapreduce/lib/*,
+      /usr/local/hadoop/share/hadoop/yarn/*,
+      /usr/local/hadoop/share/hadoop/yarn/lib/*
+    </value>
+  </property>
+</configuration>

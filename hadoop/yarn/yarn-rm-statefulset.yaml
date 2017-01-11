@@ -1,0 +1,76 @@
+# A headless service to create DNS records
+apiVersion: v1
+kind: Service
+metadata:
+  name: yarn-rm
+  namespace: yarn-cluster-lp
+  labels:
+    component: yarn-rm
+spec:
+  ports:
+  - port: 8088
+    name: web
+  # *.yarn-rm.yarn-cluster-lp.svc.cluster.local
+  clusterIP: None
+  selector:
+    component: yarn-rm
+---
+# Service to access the yarn web ui
+apiVersion: v1
+kind: Service
+metadata:
+  name: yarn-ui
+  namespace: yarn-cluster-lp
+  labels:
+    component: yarn-ui
+spec:
+  type: NodePort
+  ports:
+  - port: 8088
+    targetPort: 8088
+    nodePort: 30039
+    name: web
+  selector:
+    component: yarn-rm
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: yarn-rm
+spec:
+  serviceName: "yarn-rm"
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        component: yarn-rm
+      annotations:
+        pod.alpha.kubernetes.io/initialized: "true"
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+      - name: yarn-rm
+        image: bootstrapper:5000/danisla/hadoop:2.6.4
+        ports:
+        - containerPort: 8088
+          name: web
+        command:
+           - "/bin/bash"
+           - "/tmp/hadoop-config/bootstrap.sh"
+           - "-d"
+        resources:
+          requests:
+            memory: "1024Mi"
+            cpu: "100m"
+          limits:
+            memory: "2048Mi"
+            cpu: "2000m"
+        volumeMounts:
+          - name: hadoop-config
+            mountPath: /tmp/hadoop-config
+      nodeSelector:
+        nodeRole: hadoop
+      volumes:
+        - name: hadoop-config
+          configMap:
+            name: hadoop-config

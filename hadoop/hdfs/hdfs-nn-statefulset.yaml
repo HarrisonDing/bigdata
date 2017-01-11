@@ -1,0 +1,72 @@
+# A headless service to create DNS records
+apiVersion: v1
+kind: Service
+metadata:
+  name: hdfs-nn
+  labels:
+    component: hdfs-nn
+spec:
+  ports:
+  - name: dfs
+    port: 9000
+    protocol: TCP
+  # *.hdfs-nn.yarn-cluster.svc.cluster.local
+  clusterIP: None
+  selector:
+    component: hdfs-nn
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hdfs-ui
+  namespace: yarn-cluster-lp
+  labels:
+    component: hdfs-ui
+spec:
+  type: NodePort
+  ports:
+  - port: 50070
+    targetPort: 50070
+    nodePort: 30070
+    name: web
+  selector:
+    component: hdfs-nn
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: hdfs-nn
+spec:
+  serviceName: "hdfs-nn"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        component: hdfs-nn
+      annotations:
+        pod.alpha.kubernetes.io/initialized: "true"
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+      - name: hdfs-nn
+        image: bootstrapper:5000/danisla/hadoop:2.6.4
+        command:
+           - "/bin/bash"
+           - "/tmp/hadoop-config/bootstrap.sh"
+           - "-d"
+        resources:
+          requests:
+            memory: "1024Mi"
+            cpu: "100m"
+          limits:
+            memory: "2048Mi"
+            cpu: "1000m"
+        volumeMounts:
+          - name: hadoop-config
+            mountPath: /tmp/hadoop-config
+      nodeSelector:
+        nodeRole: hadoop
+      volumes:
+        - name: hadoop-config
+          configMap:
+            name: hadoop-config

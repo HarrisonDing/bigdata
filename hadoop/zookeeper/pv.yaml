@@ -1,0 +1,47 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: datadir-0
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: /opt/datal3
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: datadir-1
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: /opt/datal3
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: datadir-2
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: /opt/datal3
+#  flexVolume:
+#    driver: "datera/iscsi"
+#    fsType: "xfs"
+#    options:
+#      volumeID: "kube-pv-datera-0"
+#      size: "10"
+#      replica: "3"
+#      backstoreServer: "tlx170.tlx.daterainc.com:7717"
