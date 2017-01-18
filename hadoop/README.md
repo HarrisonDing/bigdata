@@ -174,7 +174,7 @@ dataLength = 5
 numChildren = 0
 get /hello  success
 ```
-可以看到上面在zk上成功创建了一个名为 /hello 节点，里面的数据是 "world".并成功获取了该节点的数据。
+可以看到上面在zk上成功创建了一个名为 /hello 节点，里面的数据是 "world".并成功获取了该节点的数据。说明该zookeeper集群正常
 
 ### 启动yarn
 #### 初始化zookeeper节点
@@ -210,6 +210,7 @@ WATCHER::
 WatchedEvent state:SyncConnected type:None path:null
 [bfdoffline, hello, zookeeper, rmstore]
 ```
+可以看到已经在zookeeper的根节点下创建了 bfdoffline 和 rmstore两个子节点.这2个节点是用于yarn的主备切换. 节点创建成功，说明zk初始化已经完成.
 #### 启动yarn
 ```
 ➜  kube-yarn git:(master) ✗ sh kube-hadoop.sh start yarn
@@ -261,6 +262,7 @@ http://172.24.5.111:30039/cluster
 <img src="img/yarn-1.png" />
 
 #### 扩容nodemanager
+下面是扩容yarn的计算节点为4个
 ```bash
 kubectl patch statefulset yarn-nm -p '{"spec":{"replicas": '4'}}' --namespace="yarn-cluster-lp"
 ```
